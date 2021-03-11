@@ -12,16 +12,13 @@ for path, subdirs, files in os.walk(pluginDir):
         print(pathName)
         # Open file in read mode with encoding utf-8 and ignore errors.
         with open(pathName, mode='r' ,encoding='utf8', errors='ignore') as f:
-            for line in f:
-                a = re.search("error.+", line)
-                b = re.search('\$_GET.+]', line)
-                c = re.search('\$_REQUEST.+]', line)
-                d = re.search('\$_POST.+]', line)
-                if a is not None:
-                    print(a)
-                if b is not None:
-                    print(b)
-                if c is not None:
-                    print(c)
-                if d is not None:
-                    print(d) 
+            for (i, line) in enumerate(f):
+                getCall = re.search('\$_GET.+]', line)
+                requestCall = re.search('\$_REQUEST.+]', line)
+                postCall = re.search('\$_POST.+]', line)
+                if getCall is not None:
+                    print("MATCH FOUND FOR $_GET TO LINE", i, "=>", getCall)
+                if requestCall is not None:
+                    print("MATCH FOUND FOR $_REQUEST TO LINE", i, "=>", requestCall)
+                if postCall is not None:
+                    print("MATCH FOUND FOR $_GET TO LINE", i, "=>", postCall)
