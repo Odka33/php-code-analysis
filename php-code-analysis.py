@@ -1,7 +1,7 @@
 import os
 import re
 
-pluginDir = '/mnt/c/Users/odka/Documents/Ingésup/Vulnérabilité/plugin_wordpress/wp-mobile-detector'
+pluginDir = 'wp-mobile-detector'
 
 # Make a loop for each path subdir and file and generate file name for each in the directory tree
 for path, subdirs, files in os.walk(pluginDir):
