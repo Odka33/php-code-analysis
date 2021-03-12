@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.2'
 
 services:
 
@@ -15,12 +15,11 @@ services:
       WORDPRESS_DB_PASSWORD: examplepass
       WORDPRESS_DB_NAME: exampledb
     volumes:
-      - wordpress:/var/www/html
+      - wordpress-vol:/var/www/html
       - ./wp-mobile-detector:/var/www/html/wp-content/plugins/wp-mobile-detector/
     networks:
-      - wordpress-net
-      - db-net
-      - attacker-net
+      wordpress-net:
+        ipv4_address: 10.0.2.25  
   
   db:
     image: mysql:5.7
@@ -31,9 +30,10 @@ services:
       MYSQL_PASSWORD: examplepass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - db:/var/lib/mysql
+      - db-vol:/var/lib/mysql
     networks:
-      - db-net
+      wordpress-net:
+        ipv4_address: 10.0.2.20
   
   attacker:
     tty: true
@@ -46,8 +46,8 @@ services:
     volumes: 
       - attacker-vol:/var/lib/attacker-vol/data
     networks:
-      - attacker-net
-      - wordpress-net
+      wordpress-net:
+        ipv4_address: 10.0.2.15
  
   sonarqube:
     image: sonarqube:latest
@@ -59,11 +59,13 @@ services:
 
 networks:
   wordpress-net:
-  attacker-net:
-  db-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.10/24
 
 volumes:
-  wordpress:
-  db:
-  sonarqube:
+  wordpress-vol:
+  db-vol:
+  sonarqube-vol:
   attacker-vol:
