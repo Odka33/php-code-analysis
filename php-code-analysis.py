@@ -17,8 +17,8 @@ for path, subdirs, files in os.walk(pluginDir):
                 requestCall = re.search('\$_REQUEST.+]', line)
                 postCall = re.search('\$_POST.+]', line)
                 if getCall is not None:
-                    print("MATCH FOUND FOR $_GET TO LINE", i, "=>", getCall)
+                    print("MATCH FOUND FOR $_GET TO LINE", i, "=>", getCall.string)
                 if requestCall is not None:
-                    print("MATCH FOUND FOR $_REQUEST TO LINE", i, "=>", requestCall)
+                    print("MATCH FOUND FOR $_REQUEST TO LINE", i, "=>", requestCall.string)
                 if postCall is not None:
-                    print("MATCH FOUND FOR $_GET TO LINE", i, "=>", postCall)
+                    print("MATCH FOUND FOR $_GET TO LINE", i, "=>", postCall.string)

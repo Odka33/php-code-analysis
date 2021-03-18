@@ -1,0 +1,6 @@
+projectKey=wp-mobile-detector
+serverUrl=http://localhost:8060
+serverVersion=8.7.1.42226
+dashboardUrl=http://localhost:8060/dashboard?id=wp-mobile-detector
+ceTaskId=AXg3CNf8i7dcCpD76al1
+ceTaskUrl=http://localhost:8060/api/ce/task?id=AXg3CNf8i7dcCpD76al1
